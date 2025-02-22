@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Redirect to dashboard or another page after a short delay
                 setTimeout(() => {
-                    window.location.href = "home.html"; // Change this to your dashboard page
+                    window.location.href = "home.php"; // Change this to your dashboard page
                 }, 3000);
             } else {
                 messageContainer.classList.add('alert-danger');

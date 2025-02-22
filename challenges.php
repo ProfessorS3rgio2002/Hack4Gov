@@ -1,3 +1,6 @@
+<?php include "functions/session_check.php"; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,11 +31,14 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a href="home.html" class="pl-md-0 p-3 text-light">Home</a>
-              <a href="challenges.html" class="p-3 text-decoration-none text-light">Challenges</a>
-              <a href="leaderboard.html" class="p-3 text-decoration-none text-light">Leaderboard</a>
-            </div>
+          <div class="navbar-nav">
+                      <a href="home.php" class="p-3 text-decoration-none text-light">Home</a>
+                      <a href="challenges.php" class="p-3 text-decoration-none text-light">Challenges</a>
+                      <a href="rules.php" class="p-3 text-decoration-none text-light">Rules</a>
+                      <a href="leaderboard.php" class="p-3 text-decoration-none text-light">Leaderboard</a>
+                      <?php if ($role === 'admin'): ?>
+                <a href="admin.php" class="p-3 text-decoration-none text-light">Admin</a>
+            <?php endif; ?>
             <div class="nav-right d-flex justify-content-end align-items-center" style="gap: 15px;">
                 <div id="user-username" class="text-light font-weight-bold">Loading...</div>
                 
@@ -59,9 +65,6 @@
     </div>
     <div id="alert-container" style="position: fixed; top: 17%; left: 50%; transform: translateX(-50%); width: 50%; z-index: 1050;"></div>
 
-    <br>
-    <br>
-    <br>
     <div class="container">
         <div id="accordion"></div>
     </div>

@@ -1,3 +1,6 @@
+<?php include "functions/session_check.php"; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,9 +31,13 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav">
-                      <a href="home.html" class="p-3 text-decoration-none text-light">Home</a>
-                      <a href="challenges.html" class="p-3 text-decoration-none text-light">Challenges</a>
-                      <a href="leaderboard.html" class="p-3 text-decoration-none text-light">Leaderboard</a>
+                      <a href="home.php" class="p-3 text-decoration-none text-light">Home</a>
+                      <a href="challenges.php" class="p-3 text-decoration-none text-light">Challenges</a>
+                      <a href="rules.php" class="p-3 text-decoration-none text-light">Rules</a>
+                      <a href="leaderboard.php" class="p-3 text-decoration-none text-light">Leaderboard</a>
+                      <?php if ($role === 'admin'): ?>
+                <a href="admin.php" class="p-3 text-decoration-none text-light">Admin</a>
+            <?php endif; ?>
                       <!-- <a href="admin.html" class="p-3 text-decoration-none text-light">Admin</a> -->
                   </div>
                   <!-- Added ml-auto to push nav-right to the right side -->

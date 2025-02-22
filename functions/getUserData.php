@@ -44,7 +44,7 @@ if ($new_rank !== $rank) {
     $update_stmt->execute();
     $update_stmt->close();
 }
-
+$_SESSION['role'] = $role;
 // Return JSON response including updated rank
 echo json_encode([
     "username" => $username,
