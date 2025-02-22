@@ -1,0 +1,64 @@
+.badge-sm {
+    font-size: 0.65rem;  /* Smaller font */
+    padding: 3px 6px;    /* Reduce padding */
+    border-radius: 5px;  /* Optional: Make it rounded */
+}
+
+
+.category-title {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+}
+
+.category-container {
+    margin-top: 30px;
+}
+.category-osint { background-color: #f10012; } /* Soft Orange */
+.category-forensics { background-color: #FF5733; } /* Red-Orange */
+.category-cryptography { background-color: #60a9f2; } /* Blue */
+.category-web-exploitation { background-color: #28A745; } /* Green */
+.category-reverse-engineering { background-color: #be4fee; } /* Purple */
+.category-steganography { background-color: #936f04; } /* Yellow */
+.category-misc { background-color: #17A2B8; } /* Cyan */
+.category-container {
+    margin-bottom: 10px; /* Reduce spacing between categories */
+}
+
+.panel {
+    padding: 10px; /* Reduce padding */
+    margin-bottom: 8px; /* Reduce margin between panels */
+    font-size: 0.9rem; /* Reduce font size */
+}
+
+.panel-title h4 {
+    font-size: 1rem; /* Smaller title */
+    margin-bottom: 5px;
+}
+
+.panel-body {
+    padding: 8px; /* Reduce padding inside panels */
+}
+
+p {
+    margin-bottom: 5px; /* Reduce space below paragraphs */
+}
+
+.btn {
+    font-size: 0.85rem; /* Reduce button text size */
+    padding: 6px 8px; /* Reduce button size */
+}
+
+.input-group input {
+    font-size: 0.85rem; /* Smaller input field */
+    padding: 6px; /* Reduce padding */
+}
+
+.modal-body {
+    font-size: 0.9rem; /* Smaller hint text */
+}

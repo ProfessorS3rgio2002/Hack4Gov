@@ -1,0 +1,66 @@
+/* Hacker-Themed Leaderboard Table */
+.leaderboard-title {
+    text-align: center;
+    font-family: "Share Tech Mono", monospace;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0, 0 0 20px #00ff00;
+}
+
+/* Container */
+.leaderboard-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Table */
+.leaderboard-table {
+    width: 100%;
+    color: #0f0;
+    border-collapse: collapse;
+    font-family: "Hack", monospace;
+}
+
+/* Table Header */
+.leaderboard-table thead tr {
+    background: rgba(0, 255, 0, 0.3);
+    color: #17b06b;
+    font-size: 15px;
+}
+
+.leaderboard-table th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Table Rows */
+.leaderboard-table tbody tr {
+    background: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s;
+}
+
+.leaderboard-table tbody tr:hover {
+    background: rgba(0, 255, 0, 0.2);
+    text-shadow: 0 0 10px #0f0;
+}
+
+/* Rank Number */
+.rank-number {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+/* Icons */
+.leaderboard-table i {
+    margin-right: 2px;
+    color: #b7bded;
+}
+
+/* Glowing Borders */
+.leaderboard-table td, .leaderboard-table th {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}

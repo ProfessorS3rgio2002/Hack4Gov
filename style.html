@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PICT - CTF</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/flipclock.css">
+    <link rel="stylesheet" href="assets/css/bootstrap4-neon-glow.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
+  </head>
+  <body class="bg-dark text-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+      <div class="container d-flex justify-content-between">
+        <div>
+          <a href="index.html" class="navbar-brand text-neon">Home</a>
+          <a href="leaderboard.html" class="nav-link d-inline text-light">Leaderboard</a>
+        </div>
+        <div class="d-flex">
+          <div class="countdown-timer text-neon mr-4"></div>
+          <div class="text-warning">80 Points</div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container text-center mt-5">
+      <h1 class="display-3 text-neon"><b>Quest ZONE!</b></h1>
+      <p class="lead text-mono text-success">Are you ready to solve the quests?</p>
+    </div>
+
+    <div class="container mt-4">
+      <div class="card bg-black text-light border-neon">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">Hidden Message</h4>
+          <span class="text-warning">20 Points</span>
+        </div>
+        <div class="card-body">
+          <h5 class="text-neon">Forensics</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+          <div class="row text-center">
+            <div class="col-md-4">
+              <a href="#" class="btn btn-outline-success btn-shadow w-100">
+                <i class="fa fa-download mr-2"></i>Download Challenge
+              </a>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-outline-warning btn-shadow w-100" data-toggle="modal" data-target="#hint1">
+                <i class="far fa-lightbulb mr-2"></i>Get Hint
+              </button>
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter Flag">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-success" type="button">GO!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="hint1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-body">HINT 1 GOES HERE</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

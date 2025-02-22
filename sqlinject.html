@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Injection Challenge</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 400px; margin: auto; }
+    input[type="text"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; }
+    input[type="submit"] { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    input[type="submit"]:hover { background-color: #45a049; }
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Login</h2>
+    <p>Try to login using SQL Injection!</p>
+    
+    <form id="loginForm" onsubmit="return checkLogin()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <input type="submit" value="Login">
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    function checkLogin() {
+      // Simulate the server-side logic (fake user data)
+      const users = [
+        { username: 'admin', password: 'adminpassword' },
+        { username: 'user', password: 'userpassword' }
+      ];
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Vulnerable JavaScript check (simulating an SQL query vulnerability)
+      const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+
+      // Check if user exists (simulating insecure validation)
+      for (let user of users) {
+        if (user.username === username && user.password === password) {
+          document.getElementById("message").innerHTML = `<span class="success">Welcome, ${username}!</span>`;
+          return false; // Prevent form submission
+        }
+      }
+
+      // Simulate SQL injection bypass: ' OR '1'='1
+      if (username === "admin' OR '1'='1" || password === "admin' OR '1'='1") {
+        document.getElementById("message").innerHTML = `<span class="success">Welcome, admin (SQL Injection successful)!</span>`;
+        return false; // Prevent form submission
+      }
+
+      // If login fails
+      document.getElementById("message").innerHTML = `<span class="error">Invalid username or password.</span>`;
+      return false; // Prevent form submission
+    }
+  </script>
+
+</body>
+</html>
