@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         $stmt->execute();
 
         // Send the reset email with the link
-        $reset_link = "http://localhost/Hack4Gov/reset_password.php?token=" . $token;
+        $reset_link = "http://hack4govstii.serveo.net/reset_password.php?token=" . $token;
 
         // Use PHPMailer to send the email (with SMTP setup for Gmail)
         $mail = new PHPMailer(true);
