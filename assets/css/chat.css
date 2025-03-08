@@ -1,0 +1,166 @@
+/* Redesigned Chat Styles */
+.card {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+
+.card-header {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    color: #58a6ff;
+    padding: 15px;
+}
+
+.card-body {
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Message Card */
+.message-card {
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 8px;
+    width: fit-content;
+    max-width: 70%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out, background 0.3s ease;
+    word-wrap: break-word;
+    background: linear-gradient(145deg, #161b22, #0d1117);
+    color: #c9d1d9;
+}
+
+.message-card:hover {
+    transform: scale(1.02);
+}
+
+/* Sent and Received Messages */
+.message-card.sent {
+    align-self: flex-end;
+    text-align: right;
+    margin-left: auto;
+}
+
+.message-card.received {
+    align-self: flex-start;
+    text-align: left;
+    margin-right: auto;
+}
+
+/* Message Header (User Info) */
+.message-header {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #58a6ff;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.message-header .rank-icon {
+    margin-left: auto; /* Move the rank icon to the right */
+    margin-right: 5px;
+}
+
+.message-header .badge {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 7px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+/* Message Body */
+.message-body {
+    font-size: 13px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* Timestamp */
+.timestamp {
+    font-size: 10px;
+    opacity: 0.7;
+    display: block;
+    margin-top: 5px;
+}
+
+.message-card.sent .timestamp {
+    text-align: right;
+}
+
+.message-card.received .timestamp {
+    text-align: left;
+}
+
+/* Footer Input */
+.card-footer {
+    background: #161b22;
+    border-top: 1px solid #30363d;
+    padding: 12px;
+}
+
+.input-group .form-control {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 8px;
+}
+
+.input-group .btn {
+    background: #58a6ff;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: background 0.2s ease;
+}
+
+.input-group .btn:hover {
+    background: #1f6feb;
+}
+
+/* Scrollbar Styling */
+#chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 5px;
+}
+
+#chat-box::-webkit-scrollbar-thumb:hover {
+    background: #444c56;
+}
+
+/* Badges */
+.badge {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.admin { background-color: red; color: white; }
+.mod { background-color: green; color: white; }
+.user { background-color: gray; color: white; }
+.unknown { background-color: gray; color: white; }
+
+/* Badges */
+.badge-danger { background-color: red; color: white; }
+.badge-success { background-color: green; color: white; }
+.badge-secondary { background-color: gray; color: white; }

@@ -35,6 +35,7 @@
                       <a href="challenges.php" class="p-3 text-decoration-none text-light">Challenges</a>
                       <a href="rules.php" class="p-3 text-decoration-none text-light">Rules</a>
                       <a href="leaderboard.php" class="p-3 text-decoration-none text-light">Leaderboard</a>
+                      <a href="chat.php" class="p-3 text-decoration-none text-light">Chat</a>
                       <?php if ($role === 'admin'): ?>
                 <a href="admin.php" class="p-3 text-decoration-none text-light">Admin</a>
             <?php endif; ?>
