@@ -87,8 +87,12 @@
             </div>
         </div>
     </div>
-   
-
+    <audio id="receivedTone" preload="auto">
+      <source src="assets/mp3/Received.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sentTone" preload="auto">
+      <source src="assets/mp3/Sent.m4a" type="audio/mp4">
+    </audio>
    
 
 
@@ -124,6 +128,11 @@
             } else {
                 chatBox.innerHTML += formatMessage(messageData, isSentByUser);
                 chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Play received tone if the message is from someone else
+                if (!isSentByUser) {
+                    document.getElementById('receivedTone').play();
+                }
             }
         };
 
@@ -152,6 +161,9 @@
 
                 ws.send(JSON.stringify(messageData));
                 messageInput.value = '';
+
+                // Play sent tone
+                document.getElementById('sentTone').play();
             }
         }
 
