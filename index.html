@@ -72,18 +72,44 @@
           </div>
 
           <div class="footer">
-            <div class="row justify-content-center" style="text-align: center">
-              <div class="col">
-                <img src="assets/img/background_1.jpg" alt="">
-              </div>
-              <div class="col">
-                <img src="assets/img/background_2.jpg" alt="">
-              </div>
-            </div>
-            <div style="text-align: center">
-              &copy; 2025 ProfessorS3rgio | STII
-            </div>
-          </div>
+  <div class="row justify-content-center" style="text-align: center">
+    <div class="col">
+      <img src="assets/img/background_1.jpg" alt="" class="enlargeable" style="cursor: zoom-in;">
+    </div>
+    <div class="col">
+      <img src="assets/img/Cyber_team.jpg" alt="" class="enlargeable" style="cursor: zoom-in;">
+    </div>
+    <div class="col">
+      <img src="assets/img/background_2.jpg" alt="" class="enlargeable" style="cursor: zoom-in;">
+    </div>
+  </div>
+  <div style="text-align: center">
+    &copy; 2025 ProfessorS3rgio | STII
+  </div>
+</div>
+
+<!-- Modal for enlarged image -->
+<div id="imgModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;">
+  <span id="closeModal" style="position:absolute;top:30px;right:50px;font-size:40px;color:white;cursor:pointer;">&times;</span>
+  <img id="modalImg" src="" style="max-width:90vw;max-height:90vh;border:5px solid #fff;border-radius:10px;">
+</div>
+
+<script>
+  // Enlarge image on click
+  document.querySelectorAll('.enlargeable').forEach(img => {
+    img.addEventListener('click', function() {
+      document.getElementById('modalImg').src = this.src;
+      document.getElementById('imgModal').style.display = 'flex';
+    });
+  });
+  // Close modal on X or background click
+  document.getElementById('closeModal').onclick = function() {
+    document.getElementById('imgModal').style.display = 'none';
+  };
+  document.getElementById('imgModal').onclick = function(e) {
+    if (e.target === this) this.style.display = 'none';
+  };
+</script>
       </div>
     </div>
 
