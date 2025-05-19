@@ -108,7 +108,7 @@
         const role = "<?php echo $_SESSION['role']; ?>"; 
         const rank = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : 'Unknown'; ?>"; // Handle undefined rank
 
-        const ws = new WebSocket('ws://localhost:3001');
+        const ws = new WebSocket('ws://34.59.3.2/:3001');
 
         ws.onopen = function() {
             console.log("Connected to WebSocket Server");
