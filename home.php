@@ -18,6 +18,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
     <link rel="stylesheet" href="assets/css/overlay.css">
     <link rel="stylesheet" href="assets/css/background.css">
+    <link rel="stylesheet" href="assets/css/chat.css">
     <script src="assets/js/verify.js"></script>
   </head>
   <body>
@@ -35,7 +36,7 @@
                       <a href="challenges.php" class="p-3 text-decoration-none text-light">Challenges</a>
                       <a href="rules.php" class="p-3 text-decoration-none text-light">Rules</a>
                       <a href="leaderboard.php" class="p-3 text-decoration-none text-light">Leaderboard</a>
-                      <a href="chat.php" class="p-3 text-decoration-none text-light">Chat</a>
+                      <!-- <a href="chat.php" class="p-3 text-decoration-none text-light">Chat</a> -->
                       <?php if ($role === 'admin'): ?>
                 <a href="admin.php" class="p-3 text-decoration-none text-light">Admin</a>
             <?php endif; ?>
@@ -65,6 +66,27 @@
     <div class="lead mb-3 text-mono text-success"style="text-align: center">
         Are you ready to solve the quests?
     </div>
+
+      <!-- Chat Container -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Chat Room
+            </div>
+            <div class="card-body" id="chat-box" style="height: 300px; overflow-y: scroll;">
+                <!-- Messages will be displayed here -->
+            </div>
+            <div class="card-footer">
+                <div class="input-group">
+                    <input type="text" id="message-input" class="form-control" placeholder="Type a message...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="send-button">Send</button>
+                    </div>
+                </div>
+                <div id="typing-indicator" class="text-muted" style="display: none;">Someone is typing...</div>
+            </div>
+        </div>
+    </div>
    
 
    
@@ -76,6 +98,130 @@
     <script src="assets/js/particles.js"></script>
     <script src="assets/js/app.js"></script>
     <script src="assets/js/profile2.js"></script>
+    <script>
+        const user_id = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null'; ?>;
+        const username = "<?php echo $_SESSION['username']; ?>";
+        const role = "<?php echo $_SESSION['role']; ?>"; 
+        const rank = "<?php echo isset($_SESSION['rank']) ? $_SESSION['rank'] : 'Unknown'; ?>"; // Handle undefined rank
+
+        const ws = new WebSocket('ws://localhost:3001');
+
+        ws.onopen = function() {
+            console.log("Connected to WebSocket Server");
+        };
+
+        ws.onmessage = function(event) {
+            const messageData = JSON.parse(event.data);
+            const chatBox = document.getElementById('chat-box');
+            const isSentByUser = messageData.username === username;
+
+            if (messageData.type === 'typing') {
+                const typingIndicator = document.getElementById('typing-indicator');
+                typingIndicator.style.display = 'block';
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                }, 1000);
+            } else {
+                chatBox.innerHTML += formatMessage(messageData, isSentByUser);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        };
+
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('message-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            } else {
+                ws.send(JSON.stringify({ type: 'typing', username: username }));
+            }
+        });
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+
+            if (message !== '') {
+                const messageData = {
+                    user_id: user_id,
+                    username: username,
+                    role: role,
+                    rank: rank,
+                    message: message,
+                    timestamp: Date.now()
+                };
+
+                ws.send(JSON.stringify(messageData));
+                messageInput.value = '';
+            }
+        }
+
+        function getBadge(role) {
+            switch(role) {
+                case "admin": return `<span class="badge admin">Admin</span>`;
+                case "moderator": return `<span class="badge mod">Moderator</span>`;
+                default: return ''; // Return an empty string for regular users
+            }
+        }
+
+        function getRankIcon(rank) {
+            switch(rank) {
+                case "Newbie":
+                    return `<i class="fas fa-user text-muted" style="color:#D3D3D3;"></i>`;
+                case "Script Kiddie":
+                    return `<i class="fas fa-code" style="color:#17b06b;"></i>`;
+                case "Wannabe Hacker":
+                    return `<i class="fas fa-terminal" style="color:#1E90FF;"></i>`;
+                case "Anonymous":
+                    return `<i class="fas fa-user-secret" style="color:#FF0000;"></i>`;
+                default:
+                    return `<i class="fas fa-user text-muted" style="color:#D3D3D3;"></i>`;
+            }
+        }
+
+        function formatMessage(data, isSentByUser) {
+            const badge = getBadge(data.role);
+            const rankIcon = `<i class="rank-icon">${getRankIcon(data.rank)}</i>`;
+            const messageClass = isSentByUser ? 'sent' : 'received';
+
+            return `
+                <div class="message-card ${messageClass}">
+                    <div class="message-header">
+                        ${badge} <strong>${data.username}</strong> ${rankIcon}
+                    </div>
+                    <div class="message-body">
+                        ${data.message}
+                    </div>
+                    <span class="timestamp">${formatTimestamp(data.timestamp)}</span>
+                </div>
+            `;
+        }
+
+        function formatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchChatHistory(); // Load messages from the database
+        });
+
+        function fetchChatHistory() {
+            fetch('functions/get_messages.php')
+                .then(response => response.json())
+                .then(messages => {
+                    const chatBox = document.getElementById('chat-box');
+                    chatBox.innerHTML = ""; // Clear chat box before inserting messages
+
+                    messages.forEach(messageData => {
+                        const isSentByUser = messageData.username === username;
+                        chatBox.innerHTML += formatMessage(messageData, isSentByUser);
+                    });
+
+                    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+                })
+                .catch(error => console.error('Error fetching chat history:', error));
+        }
+    </script>
   </body>
 
 </html>

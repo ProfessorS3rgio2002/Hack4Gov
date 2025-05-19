@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: sql112.ezyro.com
--- Generation Time: Feb 24, 2025 at 06:18 AM
--- Server version: 10.6.19-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Generation Time: May 19, 2025 at 07:11 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ezyro_38375951_ctf`
+-- Database: `ctf`
 --
 
 -- --------------------------------------------------------
@@ -653,6 +652,19 @@ CREATE TABLE `logs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `password_recover`
 --
 
@@ -678,7 +690,16 @@ INSERT INTO `password_recover` (`id`, `user_id`, `token`, `created_at`, `expires
 (8, 56, '41c024b413a1b7ab4a48a1815257d57ad0526c552fb45f31b7c8126a4c26cd0ce13e542c99e460d9c3b64f21532438d5e27b', '2025-02-21 08:26:14', '2025-02-21 17:26:14'),
 (9, 56, 'dda07915e12543bd7da7175544e735826eca175d4285fad32bf74b681d399a26f2e7ad4dc113dab2d240dccbf285913cf742', '2025-02-21 08:26:14', '2025-02-21 17:26:14'),
 (10, 56, '97d8d156ec06aa387146a607aa6a46e2f678659c780d5b5f41fd16a668e7194f400d95b578e188b5c7933fa625ec7cd042bd', '2025-02-21 08:26:15', '2025-02-21 17:26:15'),
-(11, 56, 'a09dc99dfa2401b017c33cb1ca3b766443a038b7c65ecfcfd5802d96b5a93fae8beb0802818259643960584be5a9956c4ddd', '2025-02-21 08:26:21', '2025-02-21 17:26:21');
+(11, 56, 'a09dc99dfa2401b017c33cb1ca3b766443a038b7c65ecfcfd5802d96b5a93fae8beb0802818259643960584be5a9956c4ddd', '2025-02-21 08:26:21', '2025-02-21 17:26:21'),
+(12, 9, '4270eb62a0f27dee7d76b09e79031b936f129b1e3baa48347603e78ef32c5ee0b9edf2abb715afa1900aa3935c8d4c614ca7', '2025-05-19 16:38:07', '2025-05-20 01:38:07'),
+(13, 9, '58121fa88e9734f0a267626eea805a15691149632a6a71b540abae8e84fa5fe7c42f683f66bb4108c46fb21f3b70f5fe6c4e', '2025-05-19 16:38:11', '2025-05-20 01:38:11'),
+(14, 9, 'c38b8c8cf0edadd53eb679ecc7968eb3b3fd87c9a418b0ca024fa8604f9fffd899c8789d30edc6b35c6d156a06c7137a3677', '2025-05-19 16:43:38', '2025-05-20 01:43:38'),
+(15, 9, '3174d1cd82194549cd87ed89f497f2f7d2e2a5ee466200d3cfc873cdaed03a03a51ae25acedf7de879ffc88d1f8d94e8ea9b', '2025-05-19 16:43:38', '2025-05-20 01:43:38'),
+(16, 9, 'baba04952b4355e81235f98b9b0bebe56282d481c47bcd1018ab1bb44d13535fb2b58090b6a41609746e438471be228a49ef', '2025-05-19 16:43:39', '2025-05-20 01:43:39'),
+(17, 9, '3335ff57ee5e5251e127decc57ae08a573a1ed997b950397d29d330ec0b96ac790afe92175a6a3d71706d6a100ceef04328e', '2025-05-19 16:43:39', '2025-05-20 01:43:39'),
+(18, 9, 'ca2e43e362a43b654a381a9a125d291514e417191b922ca04a06d56fddaaf80c46e231059660eee160bda64a704334b19ebd', '2025-05-19 16:43:39', '2025-05-20 01:43:39'),
+(19, 9, 'cc5ba5f576852528012a5389a8c53770c15ea8938b8fc0ad90c440c18e24f7e126b453a477546ac0648f2d4727876406bd37', '2025-05-19 16:43:42', '2025-05-20 01:43:42'),
+(20, 9, '48ef6cfa20610120302e6c788abd2f9a1e73faee5739548d7a88de7e7890e1f04f747da7f8779473b3cd2f062b81a8790016', '2025-05-19 16:44:43', '2025-05-20 01:44:43');
 
 -- --------------------------------------------------------
 
@@ -896,7 +917,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `rank`, `created_at`, `email`, `points`) VALUES
-(9, 'ProfessorS3rgio', '$2y$10$NGGU3gMCrE9sDBMK2j5T7eLJ70SLk6O3Na91QLP/0NZrLDFWJv3Dy', 'admin', 'Script Kiddie', '2024-12-20 15:35:06', 'billymamaril2002@gmail.com', 225),
+(9, 'ProfessorS3rgio', '$2y$10$BvggHkMxu1SHPaUDCG4FaOFvs2mIbcobFRWwD5eivKITurITwOGm2', 'admin', 'Script Kiddie', '2024-12-20 15:35:06', 'billymamaril2002@gmail.com', 225),
 (29, 'jimx2.0', '$2y$10$pAU1vBEo.MWzp60mA7WkUeRGCUE1vWJy6/KO0u7HgLUOyb6EbYnIm', 'user', 'Newbie', '2025-02-17 06:09:25', 'ctfjimx2.0@gmail.com', 25),
 (30, 'gebhey', '$2y$10$hp.V5gZKLWsVYkOBw/OqUetBH6/YvO8.cs80txr4vHSr4bU2Hhfc.', 'user', 'Newbie', '2025-02-17 06:10:35', 'gebheye@gmail.com', 0),
 (31, 'mcriez', '$2y$10$cHfp9i5LbS9wI4oX0ojDh.MTwYGTCHPsiloJDqVIzmRMJd.ZBumPC', 'user', 'Wannabe Hacker', '2025-02-17 06:18:32', 'johver34@gmail.com', 790),
@@ -967,6 +988,13 @@ ALTER TABLE `logs`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `password_recover`
 --
 ALTER TABLE `password_recover`
@@ -1028,10 +1056,16 @@ ALTER TABLE `logs`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `password_recover`
 --
 ALTER TABLE `password_recover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `solved`
@@ -1067,6 +1101,12 @@ ALTER TABLE `challenges`
 --
 ALTER TABLE `logs`
   ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `profile`

@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         $stmt->execute();
 
         // Send the reset email with the link
-        $reset_link = "http://hack4govstii.serveo.net/reset_password.php?token=" . $token;
+        $reset_link = "http://localhost/testing/Hack4Gov/reset_password.php?token=" . $token;
 
         // Use PHPMailer to send the email (with SMTP setup for Gmail)
         $mail = new PHPMailer(true);
@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; 
             $mail->SMTPAuth = true;
-            $mail->Username = 'lorem.ipsum.sample.email@gmail.com'; // Your email
-            $mail->Password = 'novtycchbrhfyddx'; // Your email app password or password
+            $mail->Username = 'billymamaril2002@gmail.com'; // Your email
+            $mail->Password = 'fhcp jelc hywq odnv'; // Your email app password or password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom('lorem.ipsum.sample.email@gmail.com', 'Hack4Gov Team');
+            $mail->setFrom('billymamaril2002@gmail.com', 'Hack4Gov Team');
             $mail->addAddress($email); // The user's email
 
             // Content
