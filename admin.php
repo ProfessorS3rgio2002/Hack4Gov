@@ -105,6 +105,18 @@ if ($result->num_rows > 0) {
         <button id="add-challenge-btn" class="btn btn-outline-success" style="display: none;">
             Add Challenge
         </button>
+
+         <!-- Toggle Challenges Button -->
+    <button id="toggle-challenges-btn" class="btn btn-outline-warning ml-3">
+        Loading...
+    </button>
+
+<!-- Toggle Filter by Date Button -->
+    <button id="toggle-filter-by-date-btn" class="btn btn-outline-primary ml-3">
+        Loading...
+    </button>
+
+</div>
     </div>
 
     <div id="success-message" class="alert alert-success text-center" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 1050;">
@@ -564,6 +576,114 @@ document.getElementById("confirmDeleteBtn").addEventListener("click", function()
 
 
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch the current global status of challenges
+        fetch("functions/get_global_status.php")
+            .then(response => response.json())
+            .then(data => {
+                const toggleButton = document.getElementById("toggle-challenges-btn");
+                if (data.success) {
+                    const currentStatus = data.status;
+                    toggleButton.textContent = currentStatus === "enabled" ? "Disable All Challenges" : "Enable All Challenges";
+                    toggleButton.dataset.status = currentStatus;
+                } else {
+                    toggleButton.textContent = "Error Loading Status";
+                    toggleButton.disabled = true;
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching global status:", error);
+                const toggleButton = document.getElementById("toggle-challenges-btn");
+                toggleButton.textContent = "Error Loading Status";
+                toggleButton.disabled = true;
+            });
+
+        // Handle the toggle button click
+        document.getElementById("toggle-challenges-btn").addEventListener("click", function () {
+            const toggleButton = this;
+            const currentStatus = toggleButton.dataset.status;
+            const newStatus = currentStatus === "enabled" ? "disabled" : "enabled";
+
+            fetch("functions/toggle_global_status.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ status: newStatus }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        toggleButton.textContent = newStatus === "enabled" ? "Disable All Challenges" : "Enable All Challenges";
+                        toggleButton.dataset.status = newStatus;
+                        alert(`Challenges have been ${newStatus}`);
+                    } else {
+                        alert("Failed to update global status");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error toggling global status:", error);
+                    alert("An error occurred while updating the status.");
+                });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch the current filter_by_date status
+        fetch("functions/get_global_status.php?setting=filter_by_date")
+            .then(response => response.json())
+            .then(data => {
+                const filterButton = document.getElementById("toggle-filter-by-date-btn");
+                if (data.success) {
+                    const currentStatus = data.status;
+                    filterButton.textContent = currentStatus === "enabled" ? "Disable Date Filter" : "Enable Date Filter";
+                    filterButton.dataset.status = currentStatus;
+                } else {
+                    filterButton.textContent = "Error Loading Status";
+                    filterButton.disabled = true;
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching filter status:", error);
+                const filterButton = document.getElementById("toggle-filter-by-date-btn");
+                filterButton.textContent = "Error Loading Status";
+                filterButton.disabled = true;
+            });
+
+        // Handle the filter by date button click
+        document.getElementById("toggle-filter-by-date-btn").addEventListener("click", function () {
+            const filterButton = this;
+            const currentStatus = filterButton.dataset.status;
+            const newStatus = currentStatus === "enabled" ? "disabled" : "enabled";
+
+            fetch("functions/toggle_global_status.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ setting: "filter_by_date", status: newStatus }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        filterButton.textContent = newStatus === "enabled" ? "Disable Date Filter" : "Enable Date Filter";
+                        filterButton.dataset.status = newStatus;
+                        alert(`Date filter has been ${newStatus}`);
+                    } else {
+                        alert("Failed to update date filter status");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error toggling date filter:", error);
+                    alert("An error occurred while updating the date filter.");
+                });
+        });
+    });
+</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <script src="functions/add_challenge.js"></script>
     <script src="assets/js/particles.js"></script>

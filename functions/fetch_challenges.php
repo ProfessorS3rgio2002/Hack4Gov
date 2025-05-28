@@ -9,6 +9,25 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Check global status for challenges
+$query_status = "SELECT value FROM settings WHERE name = 'challenges_status'";
+$result_status = $conn->query($query_status);
+$status_row = $result_status->fetch_assoc();
+
+if ($status_row['value'] === 'disabled') {
+    echo json_encode(["error" => "Challenges are currently disabled."]);
+    exit();
+}
+
+// Check if filtering by today's date is enabled
+$query_filter = "SELECT value FROM settings WHERE name = 'filter_by_date'";
+$result_filter = $conn->query($query_filter);
+$filter_row = $result_filter->fetch_assoc();
+$filter_by_date = $filter_row['value'] === 'enabled';
+
+// Add a condition to filter challenges by today's date if the setting is enabled
+$date_condition = $filter_by_date ? "AND DATE(c.created_at) = CURDATE()" : "";
+
 // Fetch all challenges with difficulty and the number of users who solved each challenge
 $query = "SELECT c.challenge_id, c.category_id, c.title, c.description, c.file, c.points, c.difficulty, c.hint, 
                  cat.name AS category_name, 
@@ -16,6 +35,7 @@ $query = "SELECT c.challenge_id, c.category_id, c.title, c.description, c.file, 
           FROM challenges c
           INNER JOIN category cat ON c.category_id = cat.category_id
           LEFT JOIN solved s ON c.challenge_id = s.challenge_id
+          WHERE 1=1 $date_condition -- Add date condition if filtering by date
           GROUP BY c.challenge_id
           ORDER BY c.points ASC"; // Order challenges from lowest to highest points
 
