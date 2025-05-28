@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>";
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // GET request: Check for the 'key' parameter and redirect if correct
-    if (isset($_GET['key']) && $_GET['key'] === 'get_this_flag') {
+    if (isset($_GET['key']) && strcasecmp($_GET['key'], 'get_this_flag') === 0) {
         header("Location: super_secret_flag.php");
         exit;
     }
